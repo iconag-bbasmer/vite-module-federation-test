@@ -1,0 +1,14 @@
+[
+  {
+    "path": "app1",
+    "linkName": "Component 1",
+    "appName": "Header1",
+    "importLink": "sbhApp1/AppHeader"
+  },
+  {
+    "path": "app2",
+    "linkName": "Component 2",
+    "appName": "Header2",
+    "importLink": "sbhApp2/AppHeader"
+  }
+]
