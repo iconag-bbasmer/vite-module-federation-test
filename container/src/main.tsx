@@ -24,7 +24,7 @@ const router = createBrowserRouter(
   [
     {
       // path: "/index.html",
-      path: "/index.html",
+      path: "/",
       element: <App />,
       errorElement: <ErrorPage />,
       // children: [
@@ -33,10 +33,10 @@ const router = createBrowserRouter(
       // ],
       children: availableComponents,
     },
-  ],
-  {
-    basename: "/b-con/portal/sbh/",
-  }
+  ]
+  // {
+  //   basename: "/b-con/portal/sbh/",
+  // }
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
