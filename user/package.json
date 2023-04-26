@@ -9,7 +9,7 @@
     "build_bcon": "tsc && vite build --mode bcon --base=/b-con/portal/sbh/",
     "preview": "vite preview --port 4173 --strictPort"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

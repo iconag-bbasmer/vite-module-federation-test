@@ -1,17 +1,25 @@
 import * as React from "react";
 import "./App.css";
-import useUserStore from "./components/store/UserStore";
+import useUserStore from "sbhContainer/UserStore";
 import { Outlet, Link } from "react-router-dom";
-import externalComponents from "./externalComponents.json";
-const UserInfo = React.lazy(() => import("sbhUser/UserInfo"));
+import RemoteComponent from "./components/RemoteComponent";
 
 function App() {
   const [user] = useUserStore();
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
+  const [loadedModules, setLoadedModules] = React.useState<any[]>([]);
 
   const loadUserInfo = (e: any) => {
-    setShowInfo(true);
+    fetch("./externalRemotes.json").then((response) => {
+      response.json().then((obj) => {
+        setLoadedModules(obj);
+      });
+    });
   };
+
+  React.useEffect(() => {
+    setShowInfo(true);
+  }, [loadedModules]);
 
   return (
     <div className="App">
@@ -21,21 +29,34 @@ function App() {
       </div>
       <div style={{ marginTop: 10 }}>
         <button onClick={loadUserInfo} style={{ backgroundColor: "#444" }}>
-          Userinfo Laden
+          Load Modules
         </button>
-        <React.Suspense fallback={<div>Loading...</div>}>{showInfo && <UserInfo />}</React.Suspense>
-      </div>
-      <nav>
-        <ul>
-          {externalComponents.map((component, idx) => (
-            <li key={idx}>
-              <Link to={component.path}>{component.linkName}</Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <div>
-        <Outlet />
+        {showInfo === true ? (
+          <>
+            {loadedModules.map((remoteApp, idx) => (
+              <div style={{ marginTop: 10 }} key={idx}>
+                <RemoteComponent
+                  remoteUrl={remoteApp.remoteUrl}
+                  remote={remoteApp.component}
+                  component={remoteApp.module}
+                  fallback={<div>Loading...</div>}
+                />
+              </div>
+            ))}
+            {/* <nav>
+              <ul>
+                {loadedModules.map((component, idx) => (
+                  <li key={idx}>
+                    <Link to={component.remoteUrl}>{component.module}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav> */}
+            <div>
+              <Outlet />
+            </div>
+          </>
+        ) : null}
       </div>
     </div>
   );

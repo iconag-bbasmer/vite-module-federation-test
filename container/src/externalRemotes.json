@@ -1,0 +1,17 @@
+[
+  {
+    "remoteUrl": "http://localhost:4173",
+    "component": "sbhUser",
+    "module": "UserInfo"
+  },
+  {
+    "remoteUrl": "http://localhost:4174",
+    "component": "sbhApp1",
+    "module": "AppHeader"
+  },
+  {
+    "remoteUrl": "http://localhost:4175",
+    "component": "sbhApp2",
+    "module": "AppHeader"
+  }
+]
