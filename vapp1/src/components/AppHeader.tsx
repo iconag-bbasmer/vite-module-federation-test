@@ -3,7 +3,7 @@ import useUserStore from "sbhContainer/UserStore";
 
 const AppHeader = () => {
   const [user] = useUserStore();
-  const [check, setCheck] = React && React.useState<boolean>(false);
+  const [check, setCheck] = React.useState<boolean>(false);
 
   const buttonHandler = (e: any) => {
     setCheck(true);
