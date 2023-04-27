@@ -9,7 +9,7 @@ function App() {
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
   const [loadedModules, setLoadedModules] = React.useState<any[]>([]);
 
-  const loadUserInfo = (e: any) => {
+  const loadModules = (e: any) => {
     fetch("./externalRemotes.json").then((response) => {
       response.json().then((obj) => {
         setLoadedModules(obj);
@@ -28,12 +28,13 @@ function App() {
         User in Container: {user}
       </div>
       <div style={{ marginTop: 10 }}>
-        <button onClick={loadUserInfo} style={{ backgroundColor: "#444" }}>
+        <button onClick={loadModules} style={{ backgroundColor: "#444" }}>
           Load Modules
         </button>
         {showInfo === true ? (
           <>
-            {loadedModules.map((remoteApp, idx) => (
+            <RemoteComponent modulesToLoad={loadedModules} fallback={<div>Loading...</div>} />
+            {/* {loadedModules.map((remoteApp, idx) => (
               <div style={{ marginTop: 10 }} key={idx}>
                 <RemoteComponent
                   remoteUrl={remoteApp.remoteUrl}
@@ -42,7 +43,7 @@ function App() {
                   fallback={<div>Loading...</div>}
                 />
               </div>
-            ))}
+            ))} */}
             {/* <nav>
               <ul>
                 {loadedModules.map((component, idx) => (

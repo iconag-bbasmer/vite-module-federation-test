@@ -1,13 +1,13 @@
 [
   {
-    "remoteUrl": "http://localhost:4173/assets/remoteEntry.js",
-    "component": "sbhUser",
-    "module": "UserInfo"
-  },
-  {
     "remoteUrl": "http://localhost:4174/assets/remoteEntry.js",
     "component": "sbhApp1",
     "module": "AppHeader"
+  },
+  {
+    "remoteUrl": "http://localhost:4173/assets/remoteEntry.js",
+    "component": "sbhUser",
+    "module": "UserInfo"
   },
   {
     "remoteUrl": "http://localhost:4175/assets/remoteEntry.js",

@@ -11,6 +11,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       federation({
         name: "sbhContainer",
         filename: "remoteEntry.js",
+        shared: ["react", "react-dom", "jotai"],
         exposes: {
           "./UserStore": "./src/components/store/UserStore",
         },
@@ -20,20 +21,19 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
               ? "/b-con/portal/sbh/assets/remoteEntry"
               : "http://localhost:5001/assets/remoteEntry.js",
         },
-        // shared: ["react", "react-dom", "jotai"],
-        shared: {
-          ...dependencies,
-          ...peerDependencies,
-          react: {
-            requiredVersion: peerDependencies["react"],
-          },
-          "react-dom": {
-            requiredVersion: peerDependencies["react-dom"],
-          },
-          jotai: {
-            requiredVersion: dependencies["jotai"],
-          },
-        },
+        // shared: {
+        //   ...dependencies,
+        //   ...peerDependencies,
+        //   react: {
+        //     requiredVersion: peerDependencies["react"],
+        //   },
+        //   "react-dom": {
+        //     requiredVersion: peerDependencies["react-dom"],
+        //   },
+        //   jotai: {
+        //     requiredVersion: dependencies["jotai"],
+        //   },
+        // },
       }),
     ],
     build: {

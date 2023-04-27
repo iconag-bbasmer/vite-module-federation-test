@@ -11,6 +11,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       federation({
         name: "sbhUser",
         filename: "remoteEntry.js",
+        shared: ["react", "react-dom"],
         remotes: {
           sbhContainer:
             command === "build" && mode === "bcon"
@@ -20,7 +21,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         exposes: {
           "./UserInfo": "./src/components/UserInfo",
         },
-        // shared: ["react", "react-dom"],
         // shared: {
         //   ...peerDependencies,
         //   react: {

@@ -11,6 +11,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       federation({
         name: "sbhApp2",
         filename: "remoteEntry.js",
+        shared: ["react", "react-dom"],
         remotes: {
           sbhContainer:
             command === "build" && mode === "bcon"
@@ -20,18 +21,17 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         exposes: {
           "./AppHeader": "./src/components/AppHeader",
         },
-        // shared: ["react", "react-dom"],
-        shared: {
-          ...peerDependencies,
-          react: {
-            requiredVersion: peerDependencies["react"],
-            generate: false,
-          },
-          "react-dom": {
-            requiredVersion: peerDependencies["react-dom"],
-            generate: false,
-          },
-        },
+        // shared: {
+        //   ...peerDependencies,
+        //   react: {
+        //     requiredVersion: peerDependencies["react"],
+        //     generate: false,
+        //   },
+        //   "react-dom": {
+        //     requiredVersion: peerDependencies["react-dom"],
+        //     generate: false,
+        //   },
+        // },
       }),
     ],
     build: {
