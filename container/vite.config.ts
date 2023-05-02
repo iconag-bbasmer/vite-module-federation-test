@@ -20,6 +20,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
             command === "build" && mode === "bcon"
               ? "/b-con/portal/sbh/assets/remoteEntry"
               : "http://localhost:5001/assets/remoteEntry.js",
+          sbhEmpty: {
+            external: `new Promise(resolve=>resolve('http://localhost:4177/assets/remoteEntry.js'))`,
+            externalType: "promise",
+          },
         },
         // shared: {
         //   ...dependencies,

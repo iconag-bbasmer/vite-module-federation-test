@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
-import { peerDependencies } from "./package.json";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode, ssrBuild }) => {
