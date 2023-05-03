@@ -12,3 +12,5 @@ Then open the container app at http://localhost:5001. To load the components, hi
 - In the externalRemotes.json are 3 remotes to load. There seems to be a kind of race condition though when loading multiple modules. An error shows up telling that
   React specific code is not available. Reloading the app multiple times and trying to load the components gives different results, sometimes it works, sometimes not.
   If only one module is specified in the `externalRemotes.json` file, everything works without problem.
+
+- The Empty module had to be added and statically loaded before loading other modules dynamically because the module federation plugin only offers certain functionality if at least one module is loaded statically. For example the function call `__federation_method_getRemote` that is used in `/container/src/components/RemoteComponent/index.tsx`.
