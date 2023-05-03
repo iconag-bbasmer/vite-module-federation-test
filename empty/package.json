@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite --port 4177 --strictPort",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -14,7 +15,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@originjs/vite-plugin-federation": "^1.2.2",
+    "@originjs/vite-plugin-federation": "file:..\\_moduleFederation",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",

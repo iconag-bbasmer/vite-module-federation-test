@@ -27,15 +27,17 @@ function App() {
         User in Container: {user}
       </div>
       <div style={{ marginTop: 10 }}>
-        <button onClick={loadModules} style={{ backgroundColor: "#444" }}>
-          Load Modules
-        </button>
-        {showInfo === true ? (
-          <>
-            <RemoteComponent modulesToLoad={loadedModules} fallback={<div>Loading...</div>} />
-          </>
+        {loadedModules && loadedModules.length === 0 ? (
+          <button onClick={loadModules} style={{ backgroundColor: "#444" }}>
+            Load Modules
+          </button>
         ) : null}
       </div>
+      {showInfo === true ? (
+        <>
+          <RemoteComponent modulesToLoad={loadedModules} fallback={<div>Loading...</div>} />
+        </>
+      ) : null}
     </div>
   );
 }

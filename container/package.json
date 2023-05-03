@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite --port 5001 --strictPort",
     "build": "tsc && vite build",
     "build_bcon": "tsc && vite build --mode bcon --base=/b-con/portal/sbh/",
@@ -19,7 +20,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@originjs/vite-plugin-federation": "^1.2.2",
+    "@originjs/vite-plugin-federation": "file:..\\_moduleFederation",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",

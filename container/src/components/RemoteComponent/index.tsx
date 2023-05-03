@@ -9,52 +9,42 @@ type Props = {
   [key: string]: any;
 };
 
-// const loadComponent = (remoteUrl: string, moduleName: string) => async () => {
-//   const container = await import(remoteUrl);
-//   const factory = await container.get(moduleName);
-//   const Module = factory();
-//   return Module;
-// };
-
 const EmptyComponent = Empty;
 
-const remotesMap: any = {};
-
-const loadComponent = (componentName: string, moduleName: string) => async () => {
-  // @ts-ignore
-  const component = await __federation_method_getRemote(componentName, moduleName);
-  return component.default;
-};
-
 const RemoteComponent: FC<Props> = ({ modulesToLoad, scope = "default", fallback = null, ...props }) => {
-  const [components, setCompoments] = React.useState<any>();
-
+  const [components, setComponents] = React.useState<any[]>([]);
   React.useEffect(() => {
     if (modulesToLoad.length > 0) {
-      // debugger;
-      const promises = modulesToLoad.map(async (module: any) => {
-        remotesMap[module.component] = {
+      modulesToLoad.map(async (module: any) => {
+        // @ts-ignore
+        await __federation_method_setRemote(module.component, {
           url: module.remoteUrl,
           format: "esm",
           from: "vite",
-        };
-        return await React.lazy(loadComponent(module.component, `./${module.module}`));
-      });
-      Promise.all(promises).then((results) => {
-        let tempComponents: any[] = [];
-        results.forEach((Component) => {
-          tempComponents.push(
-            <ErrorBoundary>
-              <React.Suspense fallback={fallback}>{<Component {...props} />}</React.Suspense>
-            </ErrorBoundary>
-          );
         });
-        setCompoments(tempComponents);
+
+        // @ts-ignore
+        const loadedComponent = await __federation_method_getRemote(module.component, `./${module.module}`);
+        const Component = loadedComponent.default;
+        setComponents((old) => [
+          ...old,
+          <ErrorBoundary>
+            <Component {...props} />
+          </ErrorBoundary>,
+        ]);
       });
     }
   }, [modulesToLoad]);
 
-  return <>{components && components.map((component: any) => component)}</>;
+  return (
+    <>
+      {components !== undefined && components.length > 0 ? (
+        components.map((component: any) => component)
+      ) : (
+        <p>No components</p>
+      )}
+    </>
+  );
 };
 
 export default RemoteComponent;
