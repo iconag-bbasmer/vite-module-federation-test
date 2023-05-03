@@ -4,7 +4,7 @@ This is a test repo for dynamic module federation using Vite.
 
 The modules to load are specified in the container app in `public/externalRemotes.json`. The remotes specified in this file are being loaded dynamically into the container app.
 
-To start all the apps, use your terminal of choice to cd into the 4 app folders and run `pnpm build && pnpm preview`.
+To start all the apps, use your terminal of choice to cd into the 5 app folders and run `pnpm build && pnpm preview`.
 Then open the container app at http://localhost:5001. To load the components, hit the "Load modules" button.
 
 ## Known issues
